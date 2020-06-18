@@ -80,6 +80,8 @@ include "admin/includes/functions.php"
                 $query .="values($p_id,'{$comment_author}','{$comment_email}','{$comment_content}','Unapproved',now())";
                 $send_comment_to_db=mysqli_query($conn,$query);
             confirmQuery($send_comment_to_db);
+            $query="update posts set post_comment_count=post_comment_count+1 where post_id=$p_id";
+            $update_comment_count=mysqli_query($conn,$query);
             
                
            }

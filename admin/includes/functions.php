@@ -95,7 +95,7 @@ function confirmQuery($value)
     global $conn;
     if(!$value)
     {
-        die("adding error" .mysqli_error($conn));
+        die(mysqli_error($conn));
     }
     
 }
