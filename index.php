@@ -1,6 +1,7 @@
 <?php
 include 'includes/header.php';
 include 'includes/db.php';
+include 'admin/includes/functions.php' ;
 ?>
 
 <body>
@@ -28,7 +29,7 @@ while ( $row= mysqli_fetch_assoc($select_all_posts_query ) ) {
     $post_status=$row['post_status'];
     if($post_status != 'published')
     {
-        echo "<h2 class='text-center'>None of your posts are published</h2>";
+       
     }
     else{
 

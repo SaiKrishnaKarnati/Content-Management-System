@@ -33,9 +33,9 @@
                         }
                         switch($source)
                         {
-                           case'Add_post':include "includes/Add_user.php";
+                           case'add_user':include "includes/Add_user.php";
                                           break;
-                            case'edit_post':
+                            case'edit_user':
                                 include "includes/edit_user.php";
                                           break;
                             case'36':echo 'Nice';

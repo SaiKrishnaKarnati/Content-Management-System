@@ -10,6 +10,7 @@
                                     <th>Tags</th>
                                     <th>Comments</th>
                                     <th>Date</th>
+                                    <th>Publish</th>
                                     <th>Delete</th>
                                     <th>Edit</th>
                                 </tr>
@@ -48,7 +49,7 @@
                      echo "<td>{$cat_title}</td>" ;
                      }
                                     
-                                   echo " <td>{$post_categoryid}</td>";
+                                 
                                     
                                     
                                     
@@ -63,6 +64,7 @@
                                     <td>{$post_tags}</td>
                                     <td>{$post_comment}</td>
                                     <td>{$post_date}</td>
+                                    <td><a href=posts.php?publish={$post_id}>Publish</a></td>;
                                      <td><a href=posts.php?delete={$post_id} />Delete Post</a></td>;
                                      <td><a href=posts.php?edit={$post_id}&source=edit_post />edit Post</a></td>;
                                     </tr>";
@@ -76,6 +78,16 @@
                                       $query="delete from posts where post_id={$delete_id}";
                                       $delete_post=mysqli_query($conn,$query);
                                       confirmQuery($delete_post);
+                                      header('Location:posts.php');
+                                  }
+                                
+                                  
+                                  if(isset($_GET['publish']))
+                                  {
+                                      $publish_id=$_GET['publish'];
+                                      $query="update posts set post_status='published' where post_id={$publish_id}";
+                                      $publish_post=mysqli_query($conn,$query);
+                                      confirmQuery($publish_post);
                                       header('Location:posts.php');
                                   }
                                 

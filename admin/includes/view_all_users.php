@@ -3,6 +3,7 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>Username </th>
+                                    <th>Image</th>
                                     <th>firstname</th>
                                     <th>Lastname</th>
                                      <th>Email</th>
@@ -22,7 +23,7 @@
                                     $query="select * from users";
                                     $select_all_users=mysqli_query($conn,$query);
                                     while($row=mysqli_fetch_assoc($select_all_users))
-                                    {
+                                    {$user_image=$row['user_image'];
                                         $user_id=$row['user_id'];
                                     $username=$row['username'];
                                     $user_password=$row['user_password'];
@@ -35,6 +36,7 @@
                                     
                                     echo "<td>{$user_id}</td>";
                                     echo " <td>{$username}</td>";
+                                    echo " <td><img width=100 src='../images/{$user_image}' alt='image'></td>";
                                     echo "<td>{$user_firstname}</td>";
                                     echo "<td>{$user_lastname}</td> ";
                                     echo "  <td>{$user_email}</td>";
@@ -53,10 +55,11 @@
                                         
                                         
                                     echo "<td>{Fix me fast}</td>";
-                                   echo " <td><a href=comments.php?approve= />Approve</a></td>";
-                                    echo "<td><a href=comments.php?unapprove= />UnApprove</a></td>";
+                                   echo " <td><a href=users.php?change_to_admin={$user_id} />Change to admin</a></td>";
+                                    echo "<td><a href=users.php?change_to_subscriber={$user_id} />Change to Subscriber</a></td>";
                                        
-                                        echo "<td><a href=comments.php?delete= />Delete </a></td>";
+                                        echo "<td><a href=users.php?delete={$user_id} />Delete </a></td>";
+                                        echo "<td><a href=users.php?source=edit_user&edit={$user_id} />Edit </a></td>";
                                    echo "</tr>";
                                         
                                     }
@@ -65,29 +68,29 @@
                                   if(isset($_GET['delete']))
                                   {
                                       $delete_id=$_GET['delete'];
-                                      $query="delete from comments where comment_id={$delete_id}";
-                                      $delete_comment=mysqli_query($conn,$query);
-                                      confirmQuery($delete_comment);
-                                      header('Location:comments.php');
+                                      $query="delete from users where user_id={$delete_id}";
+                                      $delete_user=mysqli_query($conn,$query);
+                                      confirmQuery($delete_user);
+                                      header('Location:users.php');
                                   }
                                 
                                 
                                 
-                                 if(isset($_GET['unapprove']))
+                                 if(isset($_GET['change_to_admin']))
                                   {
-                                      $unapprove_id=$_GET['unapprove'];
-                                      $query="update  comments  set comment_status='unapprove' where comment_id={$unapprove_id}";
-                                      $unapprove_comment=mysqli_query($conn,$query);
-                                      confirmQuery($unapprove_comment);
-                                      header('Location:comments.php');
+                                      $user_id=$_GET['change_to_admin'];
+                                      $query="update  users  set user_role='admin' where user_id={$user_id}";
+                                      $change_role=mysqli_query($conn,$query);
+                                      confirmQuery($change_role);
+                                      header('Location:users.php');
                                   }
-                                if(isset($_GET['approve']))
+                                if(isset($_GET['change_to_subscriber']))
                                   {
-                                      $approve_id=$_GET['approve'];
-                                      $query="update  comments  set comment_status='approved' where comment_id={$approve_id}";
-                                      $approve_comment=mysqli_query($conn,$query);
-                                      confirmQuery($approve_comment);
-                                      header('Location:comments.php');
+                                      $user_id=$_GET['change_to_subscriber'];
+                                      $query="update  users  set user_role='subscriber' where user_id={$user_id}";                                     
+                                       $change_role=mysqli_query($conn,$query);
+                                      confirmQuery($user_id);
+                                      header('Location:users.php');
                                   }
                                 
                                 

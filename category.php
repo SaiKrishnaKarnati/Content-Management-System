@@ -1,7 +1,7 @@
 <?php
 include 'includes/header.php';
 include 'includes/db.php';
-include 'admin/functions.php';
+include 'admin/includes/functions.php';
 ?>
 
 <body>
