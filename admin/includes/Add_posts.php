@@ -21,7 +21,7 @@ if(isset($_POST['create_post']))
     $query="insert into posts(post_category_id,post_author,post_title,post_date,post_image,post_content,post_tags,post_status) values('{$post_category_id}','{$post_author}','{$post_title}',now(),'{$post_image}','{$post_content}','{$post_tags}','{$post_status}')";
     $Add_posts_to_db=mysqli_query($conn,$query);
     confirmQuery($Add_posts_to_db);
-        
+        header('Location:posts.php');
 }
 
 
@@ -62,7 +62,10 @@ if(isset($_POST['create_post']))
 
     <div class="form-group">
         <label for="Post_status">Post Status</label>
-        <input type="text" class="form-control" name="post_status">
+       <select name="post_status" id="">
+           <option value="Draft">Draft</option>
+           <option value="published">published</option>
+       </select>
     </div>
 
     <div class="form-group">

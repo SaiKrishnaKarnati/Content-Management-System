@@ -28,14 +28,15 @@ if(isset($_POST['update_post']))
     $post_category_id=$_POST['post_category_id'];
    $post_author=$_POST['author'];
     $post_status=$_POST['post_status'];
+    
     $post_image=$_FILES['image']['name'];
     $post_image_temp=$_FILES['image']['tmp_name'];
     $post_tags=$_POST['post_tags'];
     $post_content=$_POST['post_content'];
     $edit_id=$_GET['edit'];
     $post_comment_count=5;
-    echo $post_category_id;
-    echo $post_title;
+   // $post_content=mysqli_real_escape_string($post_content);
+   
     move_uploaded_file($post_image_temp,"../images/$post_image");
     
     
@@ -43,6 +44,7 @@ if(isset($_POST['update_post']))
     
     $update_post=mysqli_query($conn,$update_query);
     confirmQuery($update_post);
+    header('Location:posts.php');
 
 
 }
@@ -81,7 +83,20 @@ if(isset($_POST['update_post']))
 
     <div class='form-group'>
         <label for='Post_status'>Post Status</label>
-        <input type='text' class='form-control' name='post_status' value='<?php echo $post_status ?>'>
+    <select name="post_status" id="">
+   <option value="<?php $post_status ?>"><?php echo $post_status ?></option>
+   <?php 
+   if($post_status == 'Draft')
+   {
+       echo " <option value='published'>published</option>";
+   }
+   else
+   {
+       echo " <option value='Draft'>Draft</option>";
+   }
+   ?>
+
+    </select>   
     </div>
 
     <div class='form-group'>

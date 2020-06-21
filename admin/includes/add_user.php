@@ -23,6 +23,9 @@ if(isset($_POST['create_user']))
      values('{$user_firstname}','{$user_lastname}','{$username}','{$user_role}','{$user_image}','{$user_email}','{$user_password}')";
     $Add_users_to_db=mysqli_query($conn,$query);
     confirmQuery($Add_users_to_db);
+
+header('Location:users.php');
+    
         
 }
 
